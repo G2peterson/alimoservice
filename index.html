@@ -4,429 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>A Limousine Associates — Cincinnati</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<style>
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #F0D080;
-    --gold-dim: #7A6030;
-    --black: #060606;
-    --card-bg: rgba(0,0,0,0.75);
-    --border: rgba(201,168,76,0.3);
-    --text: #EDE5CC;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-  html, body {
-    height: 100%;
-    background: var(--black);
-    color: var(--text);
-    font-family: 'Lato', sans-serif;
-    overflow: hidden;
-  }
-
-  /* === HERO FULLSCREEN === */
-  .hero {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background-image: url('hero.jpg');
-    background-size: cover;
-    background-position: center top;
-    z-index: 0;
-  }
-
-  /* Dark overlay for readability */
-  .hero-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.55) 0%,
-      rgba(0,0,0,0.25) 40%,
-      rgba(0,0,0,0.7) 75%,
-      rgba(0,0,0,0.92) 100%
-    );
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0;
-  }
-
-  /* === TOP NAV === */
-  .topnav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px 12px;
-    border-bottom: 1px solid rgba(201,168,76,0.2);
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(8px);
-  }
-
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .monogram {
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid var(--gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--gold);
-  }
-
-  .brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-  }
-
-  .brand-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 14px;
-    letter-spacing: 0.12em;
-    color: var(--gold-light);
-  }
-
-  .brand-sub {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    color: var(--gold-dim);
-    text-transform: uppercase;
-  }
-
-  .phone-link {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    color: var(--gold);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    border: 1px solid var(--border);
-    padding: 5px 12px;
-    border-radius: 2px;
-  }
-
-  /* === NAV TABS === */
-  .navtabs {
-    display: flex;
-    gap: 0;
-    padding: 0 20px;
-    margin-top: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .navtabs::-webkit-scrollbar { display: none; }
-
-  .navtab {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #888;
-    padding: 6px 14px;
-    border-bottom: 1px solid transparent;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: none;
-    border: none;
-    font-family: 'Lato', sans-serif;
-  }
-
-  .navtab:hover, .navtab.active {
-    color: var(--gold);
-    border-bottom: 1px solid var(--gold);
-  }
-
-  /* === MIDDLE CONTENT === */
-  .hero-mid {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 20px 16px;
-  }
-
-  /* === QR ROW === */
-  .qr-row {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .qr-card {
-    flex: 1;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 12px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    backdrop-filter: blur(12px);
-  }
-
-  .qr-card.loop-card {
-    border-color: rgba(79,195,247,0.25);
-  }
-
-  .qr-box {
-    width: 60px;
-    height: 60px;
-    background: white;
-    padding: 4px;
-    border-radius: 2px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .qr-box canvas { width: 52px !important; height: 52px !important; }
-
-  .qr-info { flex: 1; min-width: 0; }
-
-  .qr-label {
-    font-size: 8px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 3px;
-  }
-
-  .qr-label.loop-label { color: #4FC3F7; }
-
-  .qr-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    letter-spacing: 0.08em;
-    color: var(--text);
-    line-height: 1;
-    margin-bottom: 3px;
-  }
-
-  .qr-desc {
-    font-size: 9px;
-    color: #777;
-    line-height: 1.4;
-  }
-
-  /* === CTA BUTTONS === */
-  .cta-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-
-  .btn {
-    flex: 1;
-    padding: 12px 8px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.1em;
-    text-align: center;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    border-radius: 2px;
-    transition: all 0.2s;
-    border: none;
-    cursor: pointer;
-  }
-
-  .btn-gold {
-    background: var(--gold);
-    color: var(--black);
-  }
-
-  .btn-outline {
-    background: rgba(0,0,0,0.5);
-    color: var(--gold);
-    border: 1px solid var(--border);
-    backdrop-filter: blur(8px);
-  }
-
-  /* === BOTTOM BAR === */
-  .bottom-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    border-top: 1px solid var(--border);
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
-  }
-
-  .pillar {
-    font-size: 8px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #555;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .pillar-dot {
-    width: 3px;
-    height: 3px;
-    background: var(--gold-dim);
-    border-radius: 50%;
-  }
-
-  .tagline-bar {
-    font-size: 8px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #444;
-  }
-
-  .tagline-bar span { color: var(--gold-dim); }
-
-  /* === MODALS === */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    z-index: 100;
-    backdrop-filter: blur(4px);
-    align-items: flex-end;
-  }
-
-  .modal-overlay.open { display: flex; }
-
-  .modal {
-    width: 100%;
-    background: #0e0e0e;
-    border-top: 1px solid var(--border);
-    border-radius: 16px 16px 0 0;
-    padding: 24px 24px 40px;
-    animation: slideUp 0.3s ease;
-  }
-
-  @keyframes slideUp {
-    from { transform: translateY(100%); }
-    to { transform: translateY(0); }
-  }
-
-  .modal-handle {
-    width: 36px;
-    height: 3px;
-    background: #333;
-    border-radius: 2px;
-    margin: 0 auto 20px;
-  }
-
-  .modal-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.08em;
-    color: var(--gold-light);
-    margin-bottom: 16px;
-  }
-
-  .modal-body {
-    font-size: 13px;
-    color: #888;
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  .modal-close {
-    width: 100%;
-    padding: 14px;
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--gold);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    letter-spacing: 0.15em;
-    cursor: pointer;
-    border-radius: 2px;
-  }
-
-  .modal-field {
-    width: 100%;
-    background: #111;
-    border: 1px solid #222;
-    color: var(--text);
-    padding: 12px 14px;
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-    margin-bottom: 10px;
-    border-radius: 2px;
-    outline: none;
-  }
-
-  .modal-field:focus { border-color: var(--gold-dim); }
-
-  .modal-submit {
-    width: 100%;
-    padding: 14px;
-    background: var(--gold);
-    border: none;
-    color: var(--black);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    letter-spacing: 0.15em;
-    cursor: pointer;
-    border-radius: 2px;
-    margin-bottom: 10px;
-  }
-
-  /* AI badge */
-  .ai-badge {
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    background: rgba(0,0,0,0.6);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    backdrop-filter: blur(8px);
-    border-radius: 2px;
-    z-index: 3;
-  }
-</style>
 </head>
 <body>
 
 <div class="hero">
   <div class="hero-bg"></div>
-
   <div class="hero-content">
 
-    <!-- TOP NAV -->
     <div>
       <div class="topnav">
         <div class="brand">
@@ -438,7 +25,6 @@
         </div>
         <a href="tel:5139224772" class="phone-link">(513) 922-4772</a>
       </div>
-
       <div class="navtabs">
         <button class="navtab" onclick="openModal('book')">Book a Ride</button>
         <button class="navtab" onclick="openModal('quote')">Get a Quote</button>
@@ -448,17 +34,14 @@
       </div>
     </div>
 
-    <!-- MIDDLE / BOTTOM CONTENT -->
     <div class="hero-mid">
-
-      <!-- QR ROW -->
       <div class="qr-row">
         <div class="qr-card">
           <div class="qr-box" id="qr-julie"></div>
           <div class="qr-info">
             <div class="qr-label">AI Concierge</div>
             <div class="qr-name">Meet Julie</div>
-            <div class="qr-desc">Hi. I'm Julie. I'm your Cincinnati specialist. What would you like to see?</div>
+            <div class="qr-desc">Hi. I'm Julie. Your Cincinnati specialist. What would you like to see?</div>
           </div>
         </div>
         <div class="qr-card loop-card">
@@ -471,26 +54,24 @@
         </div>
       </div>
 
-      <!-- CTA BUTTONS -->
       <div class="cta-row">
-        <a href="#" onclick="openModal('book'); return false;" class="btn btn-gold">📅 Book a Ride</a>
-        <a href="#" onclick="openModal('quote'); return false;" class="btn btn-outline">💬 Get a Quote</a>
+        <a href="#" onclick="openModal('book');return false;" class="btn btn-gold">📅 Book a Ride</a>
+        <a href="#" onclick="openModal('quote');return false;" class="btn btn-outline">💬 Get a Quote</a>
         <a href="tel:5139224772" class="btn btn-outline">📞 Call Now</a>
       </div>
 
-      <!-- BOTTOM BAR -->
       <div class="bottom-bar">
-        <div class="pillar"><div class="pillar-dot"></div>Private</div>
-        <div class="pillar"><div class="pillar-dot"></div>Professional</div>
-        <div class="pillar"><div class="pillar-dot"></div>Dependable</div>
+        <div class="pillar">Private</div>
+        <div class="pillar">Professional</div>
+        <div class="pillar">Dependable</div>
         <div class="tagline-bar">Rain <span>or</span> Shine</div>
       </div>
-
     </div>
+
   </div>
 </div>
 
-<!-- BOOK A RIDE MODAL -->
+<!-- BOOK -->
 <div class="modal-overlay" id="modal-book" onclick="closeModal('book')">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
@@ -505,7 +86,7 @@
   </div>
 </div>
 
-<!-- GET A QUOTE MODAL -->
+<!-- QUOTE -->
 <div class="modal-overlay" id="modal-quote" onclick="closeModal('quote')">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
@@ -520,82 +101,49 @@
   </div>
 </div>
 
-<!-- FLEET MODAL -->
+<!-- FLEET -->
 <div class="modal-overlay" id="modal-fleet" onclick="closeModal('fleet')">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
     <div class="modal-title">Our Fleet</div>
-    <div class="modal-body">
-      A Limousine Associates operates a full fleet of luxury vehicles for every occasion.<br><br>
-      · Executive Sedans<br>
-      · Luxury SUVs<br>
-      · Stretch Limousines<br>
-      · Sprinter Vans<br>
-      · Coach Buses<br><br>
-      All vehicles are late model, fully insured, and immaculately maintained.
-    </div>
+    <div class="modal-body">Executive Sedans · Luxury SUVs · Stretch Limousines · Sprinter Vans · Coach Buses<br><br>All vehicles are late model, fully insured, and immaculately maintained.</div>
     <button class="modal-close" onclick="closeModal('fleet')">Close</button>
   </div>
 </div>
 
-<!-- ABOUT MODAL -->
+<!-- ABOUT -->
 <div class="modal-overlay" id="modal-about" onclick="closeModal('about')">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
     <div class="modal-title">About Us</div>
-    <div class="modal-body">
-      A Limousine Associates has been Cincinnati's premier chauffeur service since 1986. Professional. Dependable. Private.<br><br>
-      Now powered by In The Loop — AI assisted dispatch bringing the next generation of luxury ground transportation to Cincinnati and Northern Kentucky.<br><br>
-      Proud member of the National Limousine Association.
-    </div>
+    <div class="modal-body">A Limousine Associates has been Cincinnati's premier chauffeur service since 1986. Professional. Dependable. Private.<br><br>Now powered by In The Loop — AI assisted dispatch bringing the next generation of luxury ground transportation to Cincinnati and Northern Kentucky.<br><br>Proud member of the National Limousine Association.</div>
     <button class="modal-close" onclick="closeModal('about')">Close</button>
   </div>
 </div>
 
-<!-- CONTACT MODAL -->
+<!-- CONTACT -->
 <div class="modal-overlay" id="modal-contact" onclick="closeModal('contact')">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
     <div class="modal-title">Contact Us</div>
     <div class="modal-body">
-      <strong style="color: var(--gold);">(513) 922-4772</strong><br><br>
+      <strong style="color:var(--gold)">(513) 922-4772</strong><br><br>
       Reservation Hours:<br>
       Mon–Fri: 7:30am – 10:00pm<br>
       Sat–Sun: 9:00am – 9:00pm<br><br>
       Cincinnati, Ohio & Northern Kentucky
     </div>
-    <a href="tel:5139224772" class="modal-submit" style="display:block; text-align:center; text-decoration:none; font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:0.15em;">
-      📞 Call Now
-    </a>
+    <a href="tel:5139224772" class="modal-submit">📞 Call Now</a>
     <button class="modal-close" onclick="closeModal('contact')">Close</button>
   </div>
 </div>
 
 <script>
-  // QR Codes — placeholders
-  new QRCode(document.getElementById("qr-julie"), {
-    text: "https://julie.alimousine.com",
-    width: 52, height: 52,
-    colorDark: "#000000", colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.M
-  });
-
-  new QRCode(document.getElementById("qr-loop"), {
-    text: "https://intheloopdrivers.com",
-    width: 52, height: 52,
-    colorDark: "#000000", colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.M
-  });
-
-  function openModal(name) {
-    document.getElementById('modal-' + name).classList.add('open');
-  }
-
-  function closeModal(name) {
-    document.getElementById('modal-' + name).classList.remove('open');
-  }
+new QRCode(document.getElementById("qr-julie"),{text:"https://julie.alimousine.com",width:50,height:50,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+new QRCode(document.getElementById("qr-loop"),{text:"https://intheloopdrivers.com",width:50,height:50,colorDark:"#000000",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.M});
+function openModal(n){document.getElementById('modal-'+n).classList.add('open');}
+function closeModal(n){document.getElementById('modal-'+n).classList.remove('open');}
 </script>
 
 </body>
 </html>
-
